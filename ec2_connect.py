@@ -49,7 +49,7 @@ class EC2Connect():
 
     def nb_copy_and_start(self, localfilepath, custom_token):
         self.put_to_remote(localfilepath, "/home/ubuntu/notebook/test.ipynb")
-        self.execute_commands(["cd /home/ubuntu/notebook", "jupyter notebook --no-browser --port=8080 --NotebookApp.token="+custom_token])
+        self.execute_commands(["pip install jupyter", "cd /home/ubuntu/notebook/", "jupyter notebook --no-browser --port=8080 --NotebookApp.token="+custom_token])
         os.system("ssh -i "+self.pempath+" -N -L 8080:localhost:8080 "+"ubuntu@"+self.instance_ip)
         print("Jupyter notebook now running on EC2 instance, accessible via http://localhost:8080, token = " + custom_token)
 
